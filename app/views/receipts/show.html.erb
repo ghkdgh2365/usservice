@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Categroy:</strong>
+  <%= @receipt.categroy %>
+</p>
+
+<p>
+  <strong>Pay date:</strong>
+  <%= @receipt.pay_date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @receipt.amount %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @receipt.content %>
+</p>
+
+<p>
+  <strong>Detail content:</strong>
+  <%= @receipt.detail_content %>
+</p>
+
+<p>
+  <strong>Extra:</strong>
+  <%= @receipt.extra %>
+</p>
+
+<p>
+  <strong>Bill:</strong>
+  <%= @receipt.bill %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @receipt.user %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @receipt.card %>
+</p>
+
+<%= link_to 'Edit', edit_receipt_path(@receipt) %> |
+<%= link_to 'Back', receipts_path %>

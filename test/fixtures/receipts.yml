@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  categroy: MyString
+  pay_date: 2017-11-16 15:48:25
+  amount: 1
+  content: MyString
+  detail_content: MyText
+  extra: MyText
+  bill: MyString
+  user_id: 
+  card_id: 
+
+two:
+  categroy: MyString
+  pay_date: 2017-11-16 15:48:25
+  amount: 1
+  content: MyString
+  detail_content: MyText
+  extra: MyText
+  bill: MyString
+  user_id: 
+  card_id: 
