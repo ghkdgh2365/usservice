@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20171116160754) do
   add_index "majors", ["college_id"], name: "index_majors_on_college_id"
 
   create_table "receipts", force: :cascade do |t|
-    t.string   "categroy"
+    t.string   "category"
     t.datetime "pay_date"
     t.integer  "amount"
     t.string   "content"

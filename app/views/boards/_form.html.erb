@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :제목 %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
+    <%= f.label :내용 %><br>
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :group_code %><br>
+    <%= f.label :학과코드 %><br>
     <%= f.number_field :group_code %>
   </div>
   <div class="field">
@@ -31,3 +31,10 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<style>
+   @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+   .field{
+      font-family: 'Jeju Gothic', sans-serif;
+   }
+</style>

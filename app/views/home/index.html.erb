@@ -1,0 +1,62 @@
+<div class="container">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/home/index" class="brand-logo center">어따쓰지</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><%= link_to "건의하기",  boards_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
+          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
+        <% else %>
+          <li><%= link_to "로그인", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <p>여러분의 돈, 학생회는 어따쓸까요?</p>
+  </div>
+  
+   <div class="row textbox">
+    <div class="input-field col s6">
+      <input placeholder="학교이름을 입력해주세요" id="first_name2" type="text" class="validate">
+      <label class="active" for="first_name2">First Name</label>
+    </div>
+    <a href=""><i class="large material-icons">search</i></a>
+  </div>
+  
+ 
+  
+
+        
+</div>  
+  <style>
+      @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+      .nav-wrapper {
+          font-family: 'Jeju Gothic', sans-serif;
+      }
+      #nav-mobile {
+          font-family: 'Jeju Gothic', sans-serif;
+      }
+      .textbox{
+        margin-top:100px;
+       
+      }
+      p{
+         font-family: 'Jeju Gothic', sans-serif;
+         font-size: 50px;
+         margin-top:100px;
+      }
+   
+  </style>
+  <script>
+    Materialize.updateTextFields(
+      
+      $('#textarea1').val('New Text');
+      $('#textarea1').trigger('autoresize');
+      
+      );
+      
+  </script>

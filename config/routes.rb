@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'home#index'
+  get 'home/index'
+
   resources :boards
   resources :receipts
   devise_for :users

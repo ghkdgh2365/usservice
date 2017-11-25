@@ -1,7 +1,7 @@
 class CreateReceipts < ActiveRecord::Migration
   def change
     create_table :receipts do |t|
-      t.string :categroy
+      t.string :category
       t.datetime :pay_date
       t.integer :amount
       t.string :content
