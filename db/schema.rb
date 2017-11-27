@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171116160754) do
 
   create_table "majors", force: :cascade do |t|
     t.string   "major_name"
+    t.integer  "univ_id"
     t.integer  "college_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 20171116160754) do
     t.text     "detail_content"
     t.text     "extra"
     t.string   "bill"
+    t.string   "cash"
     t.integer  "user_id"
     t.integer  "card_id"
     t.datetime "created_at",     null: false

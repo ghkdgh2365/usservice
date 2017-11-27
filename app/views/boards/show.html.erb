@@ -1,29 +1,64 @@
 <div class="container">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/home/index" class="brand-logo center">어따쓰지</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><%= link_to "결산안보기", home_index_path %></li>
+       
+        <% if user_signed_in? %>
+          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
+          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
+        <% else %>
+          <li><%= link_to "로그인", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+       
+    </div>
+  </nav>
     <p id="notice"><%= notice %></p>
     
    <div class="container box">
-    <h4>
-        <%= @board.title %>
-    </h4>
-    <hr>
-    <p class="text-align:right">
-      <strong><%= @board.user %></strong>
+      <h4>
+          <%= @board.title %>
+      </h4>
+      <hr>
+      <p>
+        <strong><%= @board.user %></strong>
+        
+      </p>
+      <p class="school">
+        <strong>학교</strong>
+        <%= @board.group_code %>
+      </p>
+      <p>
+       
+        <%= @board.content %>
+      </p>
       
-    </p>
-    <p>
-      <strong>Content:</strong>
-      <%= @board.content %>
-    </p>
-    
-    <p>
-      <strong>Group code:</strong>
-      <%= @board.group_code %>
-    </p>
-    
-    
-    
-    <%= link_to '수정하기', edit_board_path(@board) %> |
-    <%= link_to 'Back', boards_path %>
+      
+      
+      
+    <div style="text-align:right">
+      <%= link_to '수정하기', edit_board_path(@board) %> |
+      <%= link_to '목록으로', boards_path %>
+    </div>  
+  </div>
+  <br>
+  <div class="container box2">
+    <div class="row">
+    <form class="col s12" action="" method="">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">댓글을 입력해주세요</label>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">댓글달기
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
+  </div>
   </div>
 </div>
 
@@ -37,7 +72,26 @@
         padding-top: 3rem !important;
         padding-bottom: 3rem !important;
   }
+  .box2{
+     border-radius: 5px;
+        border: 1px solid rgba(150,150,150,0.22);
+        padding-right: 3rem !important;
+        padding-left: 3rem !important;
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+        font-family:"Jeju Gothic";
+  }
   h4{
+    font-family:"Jeju Gothic";
+  }
+  .school{
+    text-align:right;
+  }
+  p{
+    font-family:"Jeju Gothic";
+  }
+  .btn{
+    text-align:right;
     font-family:"Jeju Gothic";
   }
   

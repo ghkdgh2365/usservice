@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
-
+  get 'receipts/show_receipts/:user_id' => 'receipts#show_receipts'
+  get 'home/search_receipts'
   resources :boards
   resources :receipts
+  resources :cards
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

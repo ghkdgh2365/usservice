@@ -1,6 +1,5 @@
 class ReceiptsController < ApplicationController
   before_action :set_receipt, only: [:show, :edit, :update, :destroy]
-
   # GET /receipts
   # GET /receipts.json
   def index
@@ -59,6 +58,11 @@ class ReceiptsController < ApplicationController
       format.html { redirect_to receipts_url, notice: 'Receipt was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def show_receipts
+    @user_id = params[:user_id]
+    @receipts = Receipt.where(user_id: @user_id)
   end
 
   private
