@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'reply/show'
+
+  get 'reply/create'
+
+  get 'reply/delete'
+
+  get 'reply/update'
+
+  get 'reply/edit'
+
+  get 'reply/new'
+
   root 'home#index'
   get 'home/index'
   get 'receipts/show_receipts/:user_id' => 'receipts#show_receipts'

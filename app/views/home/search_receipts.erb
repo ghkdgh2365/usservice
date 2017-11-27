@@ -1,13 +1,19 @@
+<div class="container">
 <h3><%= @univ.univ_name %></h3>
 <h4>총학생회</h4>
-<a href="/receipts/show_receipts/<%= User.find(@univ_id).id %>"><%= @univ.univ_name %> 총학생회</a><hr>
+<a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id).id %>"><%= @univ.univ_name %> 총학생회</a><hr>
 <h4>단과대학</h4>
 <% @colleges.each do |c| %>
-    <a href="/receipts/show_receipts/<%= @univ.id %>"><%= c.college_name %> 학생회</a> <hr>
+    <% unless User.find_by(univ_id: @univ_id, college_id: c.id) == nil or User.find_by(univ_id: @univ_id, college_id: c.id) == "" %>
+        <a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id, college_id: c.id).id %>"><%= c.college_name %> 학생회</a> <hr>
+    <% end %>
 <% end %>
 <h4>과학생회</h4>
 <% @colleges.each do |c| %>
     <% c.majors.each do |m| %>
-        <a href="/receipts/show_receipts/<%= @univ.id %>"><%= m.major_name %> 학생회</a> <hr>
+        <% unless User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id) == nil or User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id) == "" %>
+            <a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id).id %>"><%= m.major_name %> 학생회</a> <hr>
+        <% end %>
     <% end %>
 <% end %>
+</div>

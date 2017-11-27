@@ -22,35 +22,26 @@
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container money">
+    <br><br><br><br><br>
+  
+     <%= image_tag "money.jpg" , :size => "400x400" %>
+    
     <p>여러분의 돈, 학생회는 어따쓸까요?</p>
   </div>
-
-  <!-- <div class="row textbox">-->
-  <!--  <div class="input-field col s6">-->
-  <!--    <input placeholder="학교이름을 입력해주세요" id="first_name2" type="text" class="validate">-->
-  <!--  </div>-->
-  <!--  <a href=""><i class="large material-icons">search</i></a>-->
-  <!--</div>-->
-    
-  
+  <div class="row">
+    <form class="col s12" action="/home/search_receipts" method="get">
       <div class="row">
-        <form class="col s12" action="/home/search_receipts" method="get">
-          <div class="row">
-            <select class="browser-default" name="univ_id">
-              <option value="" disabled selected>대학교를 선택해주세요</option>
-              <% @univs.each do |u| %>
-                <option value="<%=u.id%>"><%=u.univ_name%></option>
-              <% end %>
-            </select>
-            <button class="btn waves-effect waves-light" style="width:100%;margin-top:15px;" type="submit" name="action">검색하기
-              <i class="material-icons right">search</i>
-            </button>
-          </div>
-        </form>
+        <select class="browser-default" name="univ_id">
+          <option value="" disabled selected>대학교를 선택해주세요</option>
+          <% @univs.each do |u| %>
+            <option value="<%=u.id%>"><%=u.univ_name%></option>
+          <% end %>
+        </select>
+        <button class="btn waves-effect waves-light disabled submit" style="width:100%;margin-top:15px;" type="submit" name="action">검색하기<i class="material-icons right">search</i></button>
       </div>
-        
-        
+    </form>
+  </div>
 </div>  
   <style>
       @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -71,12 +62,32 @@
          font-family: 'Jeju Gothic', sans-serif;
          font-size: 50px;
          margin-top:100px;
+         position: absolute;
+          top: 4%;
+          left: 50%;
+          transform: translate(-50%, -50%);
       }
       nav{
         font-family: 'Jeju Gothic', sans-serif;
       }
+      .row{
+        font-family: 'Jeju Gothic', sans-serif;
+      }
+      .money{
+        text-align:center;
+      }
+
+    
    
   </style>
   <script>
-
+      $(document).ready(function() {
+        $( "select" ).change(function() {
+          $(".submit").removeClass("disabled")
+        });
+        var selectValue = $("select option:selected").val();
+        if (selectValue != ""){
+          $(".submit").removeClass("disabled")
+        };
+      });
   </script>

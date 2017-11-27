@@ -1,0 +1,73 @@
+<div class="container">
+  <div id="dvData">
+    <table class="responsive-table striped">
+      <thead id='tblExport'>
+        <tr>
+          <th>category</th>
+          <th>Pay date</th>
+          <th>Amount</th>
+          <th>Content</th>
+          <th>Detail content</th>
+          <th>Extra</th>
+          <th>Bill</th>
+          <th>User</th>
+          <th>Cash</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @receipts.each do |receipt| %>
+          <tr>
+            <td><%= receipt.category %>1</td>
+            <td><%= receipt.pay_date %>2</td>
+            <td><%= receipt.amount %>3</td>
+            <td><%= receipt.content %>4</td>
+            <td><%= receipt.detail_content %>5</td>
+            <td><%= receipt.extra %>6</td>
+            <td><%= receipt.bill %>7</td>
+            <td><%= receipt.user %>8</td>
+            <td><%= receipt.cash %>9</td>
+            <!--<td><%= link_to 'Show', receipt %></td>-->
+            <!--<td><%= link_to 'Edit', edit_receipt_path(receipt) %></td>-->
+            <!--<td><%= link_to 'Destroy', receipt, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <a id ="btnExport">엑셀 다운로드</a>
+</div>
+
+
+<% if user_signed_in? %>
+  <%= link_to icon('edit'), edit_post_path(post) if post.updatable_by? current_user %>&nbsp;
+  <%= link_to icon('trash'), post, method: :delete, data: { confirm: 'Are you sure?' } if post.deletable_by? current_user %>
+<% end %>
+<script>
+$(document).ready(function() {
+    $("#btnExport").click(function(e) {
+        //getting values of current time for generating the file name
+        var dt = new Date();
+        var day = dt.getDate();
+        var month = dt.getMonth() + 1;
+        var year = dt.getFullYear();
+        var hour = dt.getHours();
+        var mins = dt.getMinutes();
+        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+        //creating a temporary HTML link element (they support setting file names)
+        var a = document.createElement('a');
+        //getting data from our div that contains the HTML table
+        var data_type = 'data:application/vnd.ms-excel';
+        var table_div = document.getElementById('dvData');
+        var table_html = table_div.outerHTML.replace(/ /g, '%20');
+        a.href = data_type + ', ' + table_html;
+        //setting the file name
+        a.download = 'exported_table_' + postfix + '.xls';
+        //triggering the function
+        a.click();
+        //just in case, prevent default behaviour
+        e.preventDefault();
+    });
+});
+</script>
