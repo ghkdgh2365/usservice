@@ -1,21 +1,5 @@
 <div class="container">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="/home/index" class="brand-logo center">어따쓰지</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><%= link_to "결산안보기", home_index_path %></li>
-       
-        <% if user_signed_in? %>
-          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
-          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
-        <% else %>
-          <li><%= link_to "로그인", new_user_session_path %></li>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-       
-    </div>
-  </nav>
+  
     <p id="notice"><%= notice %></p>
     
    <div class="container box">
@@ -35,8 +19,12 @@
        
         <%= @board.content %>
       </p>
-      <div class="container reply">
+      <br><br><br><br><hr>
+      <div class="reply">
         <p>댓글</p>
+       <% @board.replies do each |replies|%>
+         <%=replies.content%>
+      <%end%>
       </div>
       
       
@@ -50,10 +38,10 @@
   
   <div class="container box2">
     <div class="row">
-    <form class="col s12" action="" method="">
+    <form class="col s12" action="/reply/create/:board_id/:user_id" method="post">
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="textarea1" class="materialize-textarea" name="content"></textarea>
           <label for="textarea1">댓글을 입력해주세요</label>
         </div>
         <button class="btn waves-effect waves-light" type="submit" name="action">댓글달기

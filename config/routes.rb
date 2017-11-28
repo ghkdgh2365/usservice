@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'reply/show'
 
-  get 'reply/create'
+  post '/reply/create/:board_id/:user_id'=>"reply#create"
 
   get 'reply/delete'
 

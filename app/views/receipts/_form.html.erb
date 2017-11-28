@@ -12,40 +12,40 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :category %><br>
+    <%= f.label :category, "입금/출금" %><br>
     <%= f.text_field :category %>
   </div>
   <div class="field">
-    <%= f.label :pay_date %><br>
+    <%= f.label :pay_date, "결제날짜" %><br>
     <%= f.datetime_select :pay_date %>
   </div>
   <div class="field">
-    <%= f.label :amount %><br>
+    <%= f.label :amount, "금액" %><br>
     <%= f.number_field :amount %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
+    <%= f.label :content, "결제내용" %><br>
     <%= f.text_field :content %>
   </div>
   <div class="field">
-    <%= f.label :detail_content %><br>
+    <%= f.label :detail_content, "세부내용" %><br>
     <%= f.text_area :detail_content %>
   </div>
   <div class="field">
-    <%= f.label :extra %><br>
+    <%= f.label :extra, "비고" %><br>
     <%= f.text_area :extra %>
   </div>
   <div class="field">
-    <%= f.label :bill %><br>
+    <%= f.label :bill, "영수증유무" %><br>
     <%= f.text_field :bill %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
   <div class="field">
     <%= f.label :card_id %><br>
-    <%= f.text_field :card_id %>
+    <%= f.hidden_field :card_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

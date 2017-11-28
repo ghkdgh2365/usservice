@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'simple_token_authentication', '~> 1.0'
+gem 'rails_db'
 gem "authority"
 gem "rolify"
 gem 'materialize-sass'

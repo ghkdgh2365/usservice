@@ -1,19 +1,5 @@
 <div class="container">
- <nav>
-    <div class="nav-wrapper">
-      <a href="/home/index" class="brand-logo center">어따쓰지</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><%= link_to "결산안보기", home_index_path %></li>
-       
-        <% if user_signed_in? %>
-          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
-          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
-        <% else %>
-          <li><%= link_to "회원가입", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+ 
     <div class="container z-depth-5 box1">
       <div class="container box2">
         <h2 class="center-align">로그인</h2>
@@ -26,8 +12,10 @@
         
           <div class="field">
             <%= f.label :비밀번호 %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
+            <%= f.password_field :password, autocomplete: "off" , :style => "color:black"%>
           </div>
+          
+          
         
           <% if devise_mapping.rememberable? -%>
             <div class="field">
@@ -60,10 +48,9 @@
        .actions{
          text-align: center;
        }
-       .nav-wrapper{
-        font-family: 'Jeju Gothic', sans-serif;
-      }
+      
      li{
        font-family: 'Jeju Gothic', sans-serif;
      }
+    
 </style>

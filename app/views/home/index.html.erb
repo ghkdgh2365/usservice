@@ -1,33 +1,12 @@
 <div class="container">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="/home/index" class="brand-logo center">어따쓰지</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><%= link_to "건의하기",  boards_path %></li>
-       
-        <% if user_signed_in? %>
-          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
-          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
-        <% else %>
-          <li><%= link_to "로그인", new_user_session_path %></li>
-          <li><%= link_to "회원가입", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
-    </div>
-  </nav>
-
   <div class="container money">
-    <br><br><br><br><br>
-  
-     <%= image_tag "money.jpg" , :size => "400x400" %>
+    <br><br>
+    <h5>여러분의 돈 <br>학생회는 어따쓸까요?</h5>
+   
+     <img class="responsive-img" src="/assets/money.jpg">
+     <!--<%= image_tag "money.jpg" , :size => "400x400" %>-->
     
-    <p>여러분의 돈, 학생회는 어따쓸까요?</p>
+    
   </div>
   <div class="row">
     <form class="col s12" action="/home/search_receipts" method="get">
@@ -55,18 +34,20 @@
         margin-top:100px;
         font-family: 'Jeju Gothic', sans-serif;
       }
-  
+      h5{
+        font-family: 'Jeju Gothic', sans-serif;
+      }
      
 
-      p{
-         font-family: 'Jeju Gothic', sans-serif;
-         font-size: 50px;
-         margin-top:100px;
-         position: absolute;
-          top: 4%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-      }
+      /*p{*/
+      /*   font-family: 'Jeju Gothic', sans-serif;*/
+      /*   font-size: 50px;*/
+      /*   margin-top:100px;*/
+      /*   position: absolute;*/
+      /*    top: 4%;*/
+      /*    left: 50%;*/
+      /*    transform: translate(-50%, -50%);*/
+      /*}*/
       nav{
         font-family: 'Jeju Gothic', sans-serif;
       }
@@ -76,12 +57,17 @@
       .money{
         text-align:center;
       }
+       .responsive-img {
+          width: 360px;
+          height: 280px
+        }
 
     
    
   </style>
   <script>
       $(document).ready(function() {
+        $(".button-collapse").sideNav();
         $( "select" ).change(function() {
           $(".submit").removeClass("disabled")
         });

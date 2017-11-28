@@ -1,5 +1,7 @@
 class ReceiptsController < ApplicationController
   before_action :set_receipt, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [ :edit, :update, :destroy ]
+  
   # GET /receipts
   # GET /receipts.json
   def index
@@ -18,6 +20,7 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts/1/edit
   def edit
+    authorize_action_for @receipt
   end
 
   # POST /receipts
@@ -39,7 +42,7 @@ class ReceiptsController < ApplicationController
   # PATCH/PUT /receipts/1
   # PATCH/PUT /receipts/1.json
   def update
-    authorize_action_for @post
+    authorize_action_for @receipt
     respond_to do |format|
       if @receipt.update(receipt_params)
         format.html { redirect_to @receipt, notice: 'Receipt was successfully updated.' }
@@ -54,6 +57,7 @@ class ReceiptsController < ApplicationController
   # DELETE /receipts/1
   # DELETE /receipts/1.json
   def destroy
+    authorize_action_for @receipt
     @receipt.destroy
     respond_to do |format|
       format.html { redirect_to receipts_url, notice: 'Receipt was successfully destroyed.' }
@@ -74,6 +78,6 @@ class ReceiptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def receipt_params
-      params.require(:receipt).permit(:category, :pay_date, :amount, :content, :detail_content, :extra, :bill, :user_id, :card_id)
+      params.require(:receipt).permit(:category, :pay_date, :amount, :content, :detail_content, :extra, :bill, :user_id, :card_id, :cash)
     end
 end

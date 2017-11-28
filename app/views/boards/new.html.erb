@@ -1,18 +1,5 @@
 <div class="container">
-    <nav>
-    <div class="nav-wrapper">
-      <a href="/home/index" class="brand-logo center">어따쓰지</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><%= link_to "메인으로", home_index_path %></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "나의 정보", edit_user_registration_path %></li>
-          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
-        <% else %>
-          <li><%= link_to "회원가입", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+    
     <h1>건의문 작성하기</h1>
         
           <br>
