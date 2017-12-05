@@ -1,6 +1,15 @@
-<h1>Editing Board</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @board %> |
-<%= link_to 'Back', boards_path %>
+<div class="container">
+    <h1>수정하기</h1>
+    
+    <%= render 'form' %>
+    
+    <%= link_to 'Show', @board %> |
+    <%= link_to 'Back', boards_path %>
+</div>
+<style>
+  @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+      h1 {
+          font-family: 'Jeju Gothic', sans-serif;
+          text-align:center;
+      }
+</style>

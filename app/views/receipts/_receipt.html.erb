@@ -1,0 +1,25 @@
+  <tr>
+    <td><%= receipt.category %></td>
+    <td><%= receipt.pay_date %></td>
+    <td>
+      <% if receipt.category == "입금" %>
+        <%= receipt.amount %>
+      <% end %>
+    </td>
+    <td>
+      <% if receipt.category == "출금" %>
+        <%= receipt.amount %>
+      <% end %>
+    </td>
+    <td><%= receipt.content %></td>
+    <td><%= receipt.detail_content %></td>
+    <td><%= receipt.extra %></td>
+    <td><%= receipt.bill %></td>
+    <!--<td><%= receipt.user %></td>-->
+    <td><%= receipt.cash %></td>
+    <% if user_signed_in? %>
+    <!--<td><%= link_to 'Show', receipt %></td>-->
+    <td><%= link_to 'Edit', edit_receipt_path(receipt) if receipt.updatable_by? current_user %></td>
+    <!--<td><%= link_to 'Destroy', receipt, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } if receipt.deletable_by? current_user %></td>-->
+    <% end %>
+  </tr>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row" style="margin-top:20px;">
+    <form class="col s12" action="/boards/show_group" method="get">
+      <div class="row">
+        <div class="row quest">
+          <h2>학생회에 질문</h2>
+        </div>
+        <select class="browser-default" name="univ_id">
+          <option value="" disabled selected>대학교를 선택해주세요</option>
+          <% @univs.each do |u| %>
+            <option value="<%=u.id%>"><%=u.univ_name%></option>
+          <% end %>
+        </select>
+        <button class="btn waves-effect waves-light disabled submit" style="width:100%;margin-top:15px;" type="submit" name="action">검색하기<i class="material-icons right">search</i></button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $(".button-collapse").sideNav();
+    $( "select" ).change(function() {
+      $(".submit").removeClass("disabled")
+    });
+    var selectValue = $("select option:selected").val();
+    if (selectValue != ""){
+      $(".submit").removeClass("disabled")
+    };
+  });
+</script>
+<style>
+   @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+      h2 {
+          font-family: 'Jeju Gothic', sans-serif;
+          text-align:center;
+      }
+      .quest{
+        height:70px;
+        text-align:center;
+      }
+      .browser-default{
+        font-family: 'Jeju Gothic', sans-serif;
+      }
+      .btn{
+        font-family: 'Jeju Gothic', sans-serif;
+      }
+       
+</style>

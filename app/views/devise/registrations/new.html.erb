@@ -1,66 +1,72 @@
-<div class="container outer">
- 
-  <h2>회원가입</h2>
-  
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-  
-    <div class="field">
-      <%= f.label :email, "이메일" %><br />
-      <%= f.email_field :email, autofocus: true %>
+<div class="container">
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card-panel">
+          <h2>회원가입</h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+          
+            <div class="field">
+              <%= f.label :email, "이메일" %><br />
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+            <div class="field">
+              <%= f.label :password, "비밀번호" %>
+              <% if @minimum_password_length %>
+                (<%= @minimum_password_length %> 글자 이상)
+              <% end %><br/>
+              <p><%= f.password_field :password, autocomplete: "off"%></p>
+               
+            </div>
+            
+            
+            <div class="field">
+              <%= f.label :password_confirmation, "비밀번호확인" %><br />
+              <p><%= f.password_field :password_confirmation, autocomplete: "off" %></p>
+            </div>
+            <div class="field">
+              <%= f.label :username, "이름" %><br />
+              <%= f.text_field :username %>
+            </div>
+            <div class="field">
+                <%= f.label :univ_id, "대학교" %>
+                <%= f.collection_select :univ_id, Univ.order(:id), :id, :univ_name, {prompt: "대학교를 선택해주세요"}, {class: "browser-default"} %>
+            </div>
+            <div class="field">
+              <%= f.label :college_id, "단과대학" %>
+              <%= f.grouped_collection_select :college_id, Univ.order(:id), :colleges, :univ_name, :id, :college_name, {prompt: "단과대를 선택해주세요"}, {class: "browser-default"} %>
+            </div>
+            <div class="field" id="slide_down_major">
+              <%= f.label :major_id, "학과" %>
+              <%= f.grouped_collection_select :major_id, College.order(:id), :majors, :college_name, :id, :major_name, {prompt: "학과를 선택해주세요"}, {class: "browser-default"} %>
+            </div>
+            <div class="field">
+              <%= f.label :phone_number, "핸드폰번호" %>
+              <%= f.text_field :phone_number %>
+            </div>
+            <div class="row">
+              <div class="field col s12 m4">
+                <%= f.check_box :univ_alarm %>
+                <%= f.label :univ_alarm, "총학 알림 여부" %>
+              </div>
+              <div class="field col s12 m4">
+                <%= f.check_box :college_alarm %>
+                <%= f.label :college_alarm, "단과대 알림여부" %>
+              </div>
+              <div class="field col s12 m4">
+                <%= f.check_box :major_alarm %>
+                <%= f.label :major_alarm, "과학생회 알림여부" %>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="waves-effect waves-light btn" style="width:100%;"><%= f.submit "회원가입" %></a>
+            </div>
+          <% end %>
+          
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :password, "비밀번호" %>
-      <% if @minimum_password_length %>
-      (<%= @minimum_password_length %> 글자 이상)
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-  
-    <div class="field">
-      <%= f.label :password_confirmation, "비밀번호확인" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-    <div class="field">
-      <%= f.label :username, "이름" %><br />
-      <%= f.text_field :username %>
-    </div>
-    <div class="field">
-        <%= f.label :univ_id, "대학교" %>
-        <%= f.collection_select :univ_id, Univ.order(:id), :id, :univ_name, {prompt: "대학교를 선택해주세요"}, {class: "browser-default"} %>
-    </div>
-    <div class="field">
-      <%= f.label :college_id, "단과대학" %>
-      <%= f.grouped_collection_select :college_id, Univ.order(:id), :colleges, :univ_name, :id, :college_name, {prompt: "단과대를 선택해주세요"}, {class: "browser-default"} %>
-    </div>
-    <div class="field" id="slide_down_major">
-      <%= f.label :major_id, "학과" %>
-      <%= f.grouped_collection_select :major_id, College.order(:id), :majors, :college_name, :id, :major_name, {prompt: "학과를 선택해주세요"}, {class: "browser-default"} %>
-    </div>
-    <div class="field">
-      <%= f.label :phone_number, "핸드폰번호" %>
-      <%= f.text_field :phone_number %>
-    </div>
-    <div class="field">
-      <%= f.check_box :univ_alarm %>
-      <%= f.label :univ_alarm, "총학 알림 여부" %>
-    </div>
-    <div class="field">
-      <%= f.check_box :college_alarm %>
-      <%= f.label :college_alarm, "단과대 알림여부" %>
-    </div>
-    <div class="field">
-      <%= f.check_box :major_alarm %>
-      <%= f.label :major_alarm, "과학생회 알림여부" %>
-    </div>
-  
-  
-    <div class="actions">
-      <a class="waves-effect waves-light btn"><%= f.submit "회원가입" %></a>
-   </div>
-  <% end %>
-  
-  <%= render "devise/shared/links" %>
 </div>
 <script>
   $(document).ready(function() {
@@ -79,6 +85,7 @@
    h2{
      font-family: 'Jeju Gothic', sans-serif;
      text-align :center;
+     margin-top:0px;
    }
    .actions{
      font-family: 'Jeju Gothic', sans-serif;
@@ -88,5 +95,5 @@
      li{
        font-family: 'Jeju Gothic', sans-serif;
      }
-
+ 
 </style>

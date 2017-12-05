@@ -1,43 +1,131 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<div class="container">
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card-panel">
+        <h3>정보수정 </h3>
+    <!--<%= resource_name.to_s.humanize %>-->
+    
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+        
+          <div class="field">
+            <%= f.label :email, "이메일" %><br />
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+        
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="field">
+            <p><%= f.label :current_password, "현재비밀번호" %></p>
+            <p><%= f.password_field :current_password, autocomplete: "off" , placeholder: "현재 비밀번호를 입력해주세요", :style => "color:black;" %></p>
+          </div>
+          
+          <div class="field">
+            <p><%= f.label :password,"변경할 비밀번호를 입력해주세요" %></p> 
+           
+            <p><%= f.password_field :password, autocomplete: "off" , placeholder: "6글자이상 입력해주세요" %></p>
+            <% if @minimum_password_length %>
+              <br/>
+              
+            <% end %>
+          </div>
+        
+          <div class="field">
+            <p><%= f.label :password_confirmation, "변경할 비밀번호를 한 번 더 입력해주세요" %></p>
+            <p><%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: "6글자이상 입력해주세요" %></p>
+          </div>
+          <div class="field">
+            <%= f.label :username, "이름" %><br />
+            <%= f.text_field :username %>
+          </div>
+          <div class="field">
+              <%= f.label :univ_id, "대학교" %>
+              <%= f.collection_select :univ_id, Univ.order(:id), :id, :univ_name, {prompt: "대학교를 선택해주세요"}, {class: "browser-default"} %>
+          </div>
+          <div class="field">
+            <%= f.label :college_id, "단과대학" %>
+            <%= f.grouped_collection_select :college_id, Univ.order(:id), :colleges, :univ_name, :id, :college_name, {prompt: "단과대를 선택해주세요"}, {class: "browser-default"} %>
+          </div>
+          <div class="field" id="slide_down_major">
+            <%= f.label :major_id, "학과" %>
+            <%= f.grouped_collection_select :major_id, College.order(:id), :majors, :college_name, :id, :major_name, {prompt: "학과를 선택해주세요"}, {class: "browser-default"} %>
+          </div>
+          <div class="field">
+            <%= f.label :phone_number, "핸드폰번호" %>
+            <%= f.text_field :phone_number %>
+          </div>
+          <div class="row">
+            <div class="field col s12 m4">
+              <%= f.check_box :univ_alarm %>
+              <%= f.label :univ_alarm, "총학알림여부" %>
+            </div>
+            <div class="field col s12 m4">
+              <%= f.check_box :college_alarm %>
+              <%= f.label :college_alarm, "단과대알림여부" %>
+            </div>
+            <div class="field col s12 m4">
+              <%= f.check_box :major_alarm %>
+              <%= f.label :major_alarm, "과학생회알림여부" %>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="waves-effect waves-light btn"><%= f.submit "변경하기" %></a>
+          </div>
+        <% end %>
+       </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card-panel">
+          <h3>회원탈퇴</h3>
+            <a class="waves-effect waves-light btn">
+              <%= button_to "탈퇴하기", registration_path(resource_name), data: { confirm: "정말 탈퇴하시겠습니까?" }, method: :delete %>
+            </a>
+       </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="back">
+           <%= link_to "뒤로가기", :back, :class => "back" %>
+        </div>
+      </div>
+    </div>
+</div>
+<style>
+    @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+     .container{
+         font-family:"Jeju Gothic";
+     }
+     h3{
+         text-align: center;
+     }
+     .edit{
+         
+         padding-top:20px;
+         padding-bottom:30px;
+         padding-left:40px;
+         padding-right:40px;
+         margin-top: 50px;
+       
+     }
+     
+     .out{
+        
+         padding-top:20px;
+         padding-bottom:30px;
+         padding-left:40px;
+         padding-right:40px;
+         margin-top: 50px;
+     }
+     .waves-effect{
+       width:100%;
+     }
+     .back{
+       font-family:"Jeju Gothic";
+       text-align: right;
+     }
+  
+</style>

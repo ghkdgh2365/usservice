@@ -1,5 +1,34 @@
-<h1>New Receipt</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', receipts_path %>
+<div class="container">
+    <h1>새로운 입급/지출</h1>
+    <%= render 'form' %>
+    
+    <%= link_to '뒤로가기', receipts_path %>
+</div>
+<style>
+    @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+     .container{
+         font-family:"Jeju Gothic";
+     }
+     h1{
+         text-align: center;
+     }
+</style>
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+    var $input = $('.datepicker').pickadate()
+    
+    // Use the picker object directly.
+    var picker = $input.pickadate('picker')
+    picker.set('select', '2016-04-20', { format: 'yyyy-mm-dd' })
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
+  });
+</script>

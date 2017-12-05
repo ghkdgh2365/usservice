@@ -1,39 +1,39 @@
 <div class="container">
-    <h3><%= @univ.univ_name %></h3>
-    <h4>총학생회</h4>
+    
+    <h4><%= @univ.univ_name %></h4>
+    <p>질문하고 싶은 학생회를 선택해주세요</p>
+    <h5>총학생회</h5>
     <% unless User.find_by(univ_id: @univ_id, user_role: 1) == nil or User.find_by(univ_id: @univ_id, user_role: 1) == "" %>
         <% if User.find_by(univ_id: @univ_id, user_role: 1).active == 1 or User.find_by(univ_id: @univ_id, user_role: 1).active == "1"%>
-            <a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id, user_role: 1).id %>"><%= @univ.univ_name %> 총학생회</a><hr>
+            <a href="/boards/group/<%= User.find_by(univ_id: @univ_id, user_role: 1).id %>"><%= @univ.univ_name %> 총학생회</a><hr>
         <% else %>
             <%= @univ.univ_name %> 총학생회(미등록)
-          
         <% end %>
-         
     <% end %>
-   
-    <h4>단과대학</h4>
+    <h5>단과대학</h5>
     <% @colleges.each do |c| %>
         <% unless User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1) == nil or User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1) == "" %>
             <% if User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1).active == 1 or User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1).active == "1"%>
-                <a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1).id %>"><%= c.college_name %> 학생회</a> <hr>
+                <a href="/boards/group/<%= User.find_by(univ_id: @univ_id, college_id: c.id, user_role: 1).id %>"><%= c.college_name %> 학생회</a> <hr>
             <% else %>
                 <%= c.college_name %> 학생회(미등록)
             <% end %>
         <% end %>
     <% end %>
-    <h4>과학생회</h4>
+    <br>
+    <hr>
+    <h5>과학생회</h5>
     <% @colleges.each do |c| %>
         <% c.majors.each do |m| %>
             <% unless User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1) == nil or User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1) == "" %>
                 <% if User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1).active == 1 or User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1).active == "1"%>
-                    <a href="/receipts/show_receipts/<%= User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1).id %>"><%= m.major_name %> 학생회</a> <hr>
+                    <a href="/boards/group/<%= User.find_by(univ_id: @univ_id, college_id: c.id, major_id: m.id, user_role: 1).id %>"><%= m.major_name %> 학생회</a> <hr>
                 <% else %>
                     <%= m.major_name %> 학생회(미등록)
                 <% end %>
             <% end %>
         <% end %>
     <% end %>
-    
 </div>
 <style>
      @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -46,5 +46,15 @@
      
      .card-title{
          color: black;
+     }
+     p{
+         font-family:"Jeju Gothic";
+          text-align:center;
+     }
+     .quest{
+         text-align:center;
+     }
+     h4{
+         text-align:center;
      }
 </style>

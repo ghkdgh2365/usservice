@@ -68,8 +68,26 @@ class ReceiptsController < ApplicationController
   def show_receipts
     @user_id = params[:user_id]
     @receipts = Receipt.where(user_id: @user_id)
-  end
+    
+    @date_method = (params[:search].present? ? params[:search][:date_method] : 'pay_date').to_sym
+    @start = selected_date(:start_date)
+    @end = selected_date(:end_date)
 
+    @search_receipts = params[:search].present? ? Receipt.where(@date_method => @start..@end, user_id: @user_id) : Receipt.none
+  end
+  
+  def create_comment
+    @comment = Comment.new
+    @comment.content = params[:content]
+    @comment.user = current_user
+    @comment.post_id = params[:post_id]
+    
+    @comment.save
+    
+    redirect_to :back
+  end
+  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_receipt
@@ -79,5 +97,9 @@ class ReceiptsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def receipt_params
       params.require(:receipt).permit(:category, :pay_date, :amount, :content, :detail_content, :extra, :bill, :user_id, :card_id, :cash)
+    end
+    
+    def selected_date(symbol)
+        params[:search].present? && params[:search][symbol].present? ? params[:search][symbol].to_date : Time.now.to_date
     end
 end

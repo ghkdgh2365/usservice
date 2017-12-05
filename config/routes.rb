@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'reply/show'
 
-  post '/reply/create/:board_id/:user_id'=>"reply#create"
+  post '/reply/create/:board_id'=>"reply#create"
 
   get 'reply/delete'
 
@@ -15,10 +15,29 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'receipts/show_receipts/:user_id' => 'receipts#show_receipts'
   get 'home/search_receipts'
+  get 'home/new_ask'
+  post 'home/create_ask'
+  get 'home/admin'
+  get 'boards/search_group' # 학생회 게시판 찾을 때
+  get 'boards/show_group' # 대학 학생회 게시판 목록 보여줄 때
+  get 'boards/group/:user_id' => 'boards#group', as: "show_group_board_yap"
+  get 'boards/new/:group_code' => 'boards#new', as: "new_board_group"
+  # post 'receipts/create_comment/:post_id' => 'receipts#create_comment'
   resources :boards
   resources :receipts
   resources :cards
+  post 'cards/data' => 'cards#cardData'
   devise_for :users
+  
+  namespace :api do
+    namespace :v1 do
+      devise_scope :user do
+        post 'sessions' => 'sessions#create', :as => 'login'
+        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+        post 'sessions/verify' => 'sessions#verify_token', :as => 'send'
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

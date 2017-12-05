@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :category, "입금/출금" %><br>
-    <%= f.text_field :category %>
+    <%= f.select :category, ['출금','입금'], :selected => f.object.category, :class => "browser-default" %>
   </div>
   <div class="field">
     <%= f.label :pay_date, "결제날짜" %><br>
-    <%= f.datetime_select :pay_date %>
+    <%= f.text_field :pay_date, :class => "datepicker" %>
   </div>
   <div class="field">
     <%= f.label :amount, "금액" %><br>
@@ -29,25 +29,34 @@
   </div>
   <div class="field">
     <%= f.label :detail_content, "세부내용" %><br>
-    <%= f.text_area :detail_content %>
+    <%= f.text_area :detail_content, :class => "materialize-textarea" %>
   </div>
   <div class="field">
     <%= f.label :extra, "비고" %><br>
-    <%= f.text_area :extra %>
+    <%= f.text_area :extra, :class => "materialize-textarea" %>
   </div>
   <div class="field">
     <%= f.label :bill, "영수증유무" %><br>
-    <%= f.text_field :bill %>
+    <%= f.select :bill, ['있음','없음'], :selected => f.object.bill, :class => "browser-default" %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br>
+    <%= f.label :cash, "카드/현금" %><br>
+    <%= f.select :cash, ['카드','현금'], :selected => f.object.cash, :class => "browser-default" %>
+  </div>
+  <div class="field">
     <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
   <div class="field">
-    <%= f.label :card_id %><br>
-    <%= f.hidden_field :card_id %>
+    <%= f.hidden_field :card_id, :value => Card.find_by(user_id: current_user.id) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <a class="waves-effect waves-light btn"><%= f.submit "결제내역 저장" %></a>
   </div>
 <% end %>
+
+
+<style>
+  .waves-effect{
+    width:100%;
+  }
+</style>

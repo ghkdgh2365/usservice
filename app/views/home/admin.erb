@@ -1,0 +1,24 @@
+<% @univ_alarm.each do |u| %>
+    <%= u.username %> |
+    <% if Univ.find_by(id: u.univ_id).present? %>
+    <%= Univ.find_by(id: u.univ_id).univ_name %>
+    <% end %>
+    <br>
+<% end %>
+
+<% @college_alarm.each do |c| %>
+    <%= c.username %> |
+    <%= c.college_id %>
+    <% if College.find_by(id: c.college_id).present? %>
+        <%= College.find_by(id: c.college_id).college_name %>
+    <% end %>
+    <br>
+<% end %>
+
+<% @major_alarm.each do |m| %>
+    <%= m.username %> |
+    <% if Major.find_by(id: m.major_id).present? %>
+        <%= Major.find_by(id: m.major_id).major_name %>
+    <% end %>
+    <br>
+<% end %>

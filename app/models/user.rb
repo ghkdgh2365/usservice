@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :boards, dependent: :destroy
   has_many :asks, dependent: :destroy
-  
+  has_many :comments, dependent: :destroy
   after_create :set_default_role, if: Proc.new { User.count > 1 }
   private
 
