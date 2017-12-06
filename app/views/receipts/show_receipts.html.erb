@@ -84,8 +84,11 @@
   <!--    </div>-->
   <!--</div>-->
     <a id ="btnExport" class="waves-effect waves-light btn right">엑셀 다운로드</a>
-    <%= button_to "결제내역 추가", new_receipt_path, :id => "open-contacts-dialog-btn", :class => "waves-effect waves-light btn right", :method => :get %>
-    
+    <% if user_signed_in? %>
+      <% if @this_user_id == current_user.id %> <!-- 로그인한 유저의 아이디와 해당 학생회의 아이디가 같으면 수정 가능 --> 
+        <%= button_to "결제내역 추가", new_receipt_path, :id => "open-contacts-dialog-btn", :class => "waves-effect waves-light btn right", :method => :get %>
+      <% end %>
+    <% end %> 
    
   </div>
 <script>
