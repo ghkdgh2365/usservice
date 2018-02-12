@@ -14,12 +14,13 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo center"><%= image_tag "usblack.png" , :size => "50x30" %></a>
+      <a href="/home/index" class="brand-logo center" style="margin-top: 7px;"><%= image_tag "usblack.png" , :size => "50x30" %></a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
+      <ul class="right hide-on-med-and-down" style="margin-top: 24px;">
           <li><%= link_to "결산안 보기",  root_path %></li>
-          <li><%= link_to "건의하기",  boards_path %></li>
-        <% if user_signed_in? %>-->
+          <li><%= link_to "학생회에 질문",  boards_search_group_path %></li>
+          <li><%= link_to "요청하기",  home_new_ask_path %></li>
+        <% if user_signed_in? %>
           <li><%= link_to "나의정보", edit_user_registration_path %></li>
           <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "로그아웃하시겠습니까?" } %></li>
         <% else %>
@@ -29,7 +30,8 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
           <li><%= link_to "결산안 보기",  root_path %></li>
-          <li><%= link_to "건의하기",  boards_path %></li>
+          <li><%= link_to "학생회에 질문",  boards_search_group_path %></li>
+          <li><%= link_to "요청하기",  home_new_ask_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to "나의정보", edit_user_registration_path %></li>
           <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "로그아웃하시겠습니까?" } %></li>
@@ -40,6 +42,7 @@
       </ul>
     </div>
   </nav>
+  
 <%= yield %>
 
 </body>

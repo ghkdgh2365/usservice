@@ -10,4 +10,17 @@ class HomeController < ApplicationController
     @colleges = College.where(univ_id: @univ_id)
     @majors = Major.where(univ_id: @univ_id)
   end
+  def new_ask
+  end
+  def create_ask
+    @ask = Ask.new
+    @ask.content = params[:content]
+    @ask.user_id = params[:user_id]
+
+    respond_to do |format|
+      if @ask.save
+        format.html { redirect_to :back, notice: '작성 완료 !' }
+      end
+    end
+  end
 end

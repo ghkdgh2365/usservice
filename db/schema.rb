@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128151641) do
+ActiveRecord::Schema.define(version: 20171128161246) do
 
   create_table "asks", force: :cascade do |t|
     t.integer  "college_id"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20171128151641) do
   end
 
   add_index "colleges", ["univ_id"], name: "index_colleges_on_univ_id"
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "majors", force: :cascade do |t|
     t.string   "major_name"

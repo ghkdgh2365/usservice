@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  acts_as_token_authentication_handler_for User
+  
+  
   protect_from_forgery with: :null_session
   def authority_forbidden(error)
     Authority.logger.warn(error.message)

@@ -1,0 +1,41 @@
+<div class="container">
+  <h3>요청사항이 있다면 요청해주세요</h3>
+  <p>(ex. 우리학교, 우리 과학생회는 없어요)</p>
+  <div class="row">
+    <form class="col s12" action="/home/create_ask" method="post">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" name="content"class="materialize-textarea"></textarea>
+          <label for="textarea1">요청사항!</label> 
+        </div>
+        <% if user_signed_in? %>
+        <input type="hidden" name="user_id" value="<%= current_user.id %>" %></input>
+        <% end %>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action" style="width:100%;">보내기!
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+</div>
+<style>
+    @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+     .container{
+         font-family:"Jeju Gothic";
+     }
+     h3{
+       font-family:"Jeju Gothic";
+       text-align:center;
+     }
+     p{
+        font-family:"Jeju Gothic";
+        text-align:center;
+     }
+</style>
+<script>
+  $(document).ready(function(){
+      $("form").submit(function(){
+          alert("요청사항이 접수되었습니다");
+      });
+  });
+</script>

@@ -31,6 +31,15 @@ class CardsController < ApplicationController
   def destroy
   end
   
+  def cardData
+    @card = Card.find_by(user_id: params[:UID])
+    if  @card != nil
+      render json: { info: "card exist", CID: @card.id ,cardCompany: @card.card_company, cardNumber: @card.card_number } 
+    else
+      render json: { info: "card not exist" }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card

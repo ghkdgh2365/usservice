@@ -17,18 +17,18 @@
   </div>
   <div class="field">
     <%= f.label :내용 %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, :class => "materialize-textarea" %>
   </div>
   <div class="field">
-    <%= f.label :학과코드 %><br>
-    <%= f.number_field :group_code %>
+    <%= f.hidden_field :group_code, :value => @group_code %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
+  <% if user_signed_in? %>
+    <div class="field">
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    </div>
+  <% end %>
   <div class="actions">
-    <a class="waves-effect waves-light btn"><%= f.submit %></a>
+    <a class="waves-effect waves-light btn"><%= f.submit "건의하기" %></a>
   </div>
 <% end %>
 
@@ -36,5 +36,11 @@
    @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
    .field{
       font-family: 'Jeju Gothic', sans-serif;
+   }
+   .container{
+     font-family: 'Jeju Gothic', sans-serif;
+   }
+   .btn{
+     width:100%;
    }
 </style>

@@ -1,49 +1,93 @@
 <div class="container">
+  <div class="row showdate">
+    <%= form_for :search, method: :get do |f| %>
+     <%= f.select :date_method, options_for_select( [['In Date','pay_date'],['Out Date','pay_date']], selected: @date_method ) %>
+          <div class="col s6">
+          <%= f.label :start_date, "시작날짜"%>
+          <%= f.text_field :start_date, :value => @start, :class => "datepicker" %>
+          </div>
+          <div class="col s6">
+          <%= f.label :end_date, "마지막날짜" %>
+          <%= f.text_field :end_date, :value => @end, :class => "datepicker" %>
+          </div>
+          <div class="datesubmit">
+          <a class="waves-effect waves-light btn"><%= f.submit '날짜 설정' %></a>
+          <br><br><br>
+        
+          </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
   <div id="dvData">
     <table class="responsive-table striped">
       <thead id='tblExport'>
         <tr>
-          <th>category</th>
-          <th>Pay date</th>
-          <th>Amount</th>
-          <th>Content</th>
-          <th>Detail content</th>
-          <th>Extra</th>
-          <th>Bill</th>
-          <th>User</th>
-          <th>Cash</th>
+          <th>입/출</th>
+          <th>입출금날짜</th>
+          <th>입금금액</th>
+          <th>출금금액</th>
+          <th>사용내용</th>
+          <th>세부사항</th>
+          <th>비고</th>
+          <th>영수증유무</th>
+          <!--<th>user</th>-->
+          <th>현금/카드</th>
           <th colspan="3"></th>
         </tr>
+
       </thead>
-    
       <tbody>
-        <% @receipts.each do |receipt| %>
-          <tr>
-            <td><%= receipt.category %>1</td>
-            <td><%= receipt.pay_date %>2</td>
-            <td><%= receipt.amount %>3</td>
-            <td><%= receipt.content %>4</td>
-            <td><%= receipt.detail_content %>5</td>
-            <td><%= receipt.extra %>6</td>
-            <td><%= receipt.bill %>7</td>
-            <td><%= receipt.user %>8</td>
-            <td><%= receipt.cash %>9</td>
-            <!--<td><%= link_to 'Show', receipt %></td>-->
-            <td><%= link_to 'Edit', edit_receipt_path(receipt) %></td>
-            <!--<td><%= link_to 'Destroy', receipt, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } %></td>-->
-          </tr>
+        <%= render(@search_receipts) || content_tag(:tr, content_tag(:td, '결제내역이 없습니다. 시작날짜와 마지막날짜를 설정해주세요', colspan:10)) %>
+        <% total = 0 %>
+        <% income_sum = 0 %>
+        <% outcome_sum = 0 %>
+        <% @search_receipts.each do |s| %>
+          <% if s.category == "입금" %>
+            <% amount = (s.amount).to_i %>
+            <% income_sum += amount %>
+          <% else %>
+            <% if s.category == "출금" %>
+              <% amount = (s.amount).to_i %>
+              <% outcome_sum += amount %>
+            <% end %>
+          <% end %>
         <% end %>
+        <% total = income_sum - outcome_sum %>
+        <%= content_tag(:tr, content_tag(:td,"", colspan:9)) %>
+         <tr>
+          <td></td>
+          <td>입금/출금 총액</td>
+          <td><%= income_sum %></td>
+          <td><%= outcome_sum %></td>
+          <td>총 잔액</td>
+          <td><%= total %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
-  <a id ="btnExport">엑셀 다운로드</a>
-</div>
-
-
-<% if user_signed_in? %>
-  <%= link_to icon('edit'), edit_post_path(post) if post.updatable_by? current_user %>&nbsp;
-  <%= link_to icon('trash'), post, method: :delete, data: { confirm: 'Are you sure?' } if post.deletable_by? current_user %>
-<% end %>
+  <!--<div class="comment">-->
+    <!--<form action="/receipts/create_comment/<%=@user%>" method="post">-->
+  <!--    <div class="row">-->
+  <!--      <form class="col s12">-->
+  <!--        <div class="row">-->
+  <!--          <div class="input-field col s12">-->
+  <!--            <textarea id="textarea1" class="materialize-textarea"></textarea>-->
+  <!--            <label for="textarea1">댓글 달기</label>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </form>-->
+  <!--    </div>-->
+  <!--</div>-->
+    <a id ="btnExport" class="waves-effect waves-light btn right">엑셀 다운로드</a>
+    <%= button_to "결제내역 추가", new_receipt_path, :id => "open-contacts-dialog-btn", :class => "waves-effect waves-light btn right", :method => :get %>
+    
+   
+  </div>
 <script>
 $(document).ready(function() {
     $("#btnExport").click(function(e) {
@@ -58,10 +102,10 @@ $(document).ready(function() {
         //creating a temporary HTML link element (they support setting file names)
         var a = document.createElement('a');
         //getting data from our div that contains the HTML table
-        var data_type = 'data:application/vnd.ms-excel';
+        var data_type = 'data:application/vnd.ms-excel;charset=euc-kr';
         var table_div = document.getElementById('dvData');
         var table_html = table_div.outerHTML.replace(/ /g, '%20');
-        a.href = data_type + ', ' + table_html;
+        a.href = data_type + ',%EF%BB%BF' + table_html;
         //setting the file name
         a.download = 'exported_table_' + postfix + '.xls';
         //triggering the function
@@ -69,5 +113,34 @@ $(document).ready(function() {
         //just in case, prevent default behaviour
         e.preventDefault();
     });
+
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      format: 'yyyy-mm-dd',
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
 });
 </script>
+<style>
+    @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+     .container{
+         font-family:"Jeju Gothic";
+     }
+     h1{
+         text-align: center;
+     }
+     td{
+       font-family:"Jeju Gothic";
+     }
+     .showdate{
+       margin-top:10px;
+     }
+     .datesubmit{
+       text-align:right;
+     }
+    
+</style>

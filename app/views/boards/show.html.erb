@@ -8,12 +8,13 @@
       </h4>
       <hr>
       <p>
-        <strong><%= @board.user %></strong>
+        <strong><%= @board.user.email %></strong>
         
       </p>
       <p class="school">
-        <strong>학교</strong>
-        <%= @board.group_code %>
+        <strong></strong>
+        <% @group_code = @board.group_code %>
+        <%= User.find_by(id: @group_code).username %>
       </p>
       <p>
        
@@ -22,13 +23,13 @@
       <br><br><br><br><hr>
       <div class="reply">
         <p>댓글</p>
-       <% @board.replies do each |replies|%>
-         <%=replies.content%>
+       <% @board.replies.each do  |r|%>
+          <%=r.content%><br> 
       <%end%>
       </div>
       
       
-    <div style="text-align:right">
+    <div class="Go">
       <%= link_to '수정하기', edit_board_path(@board) %> |
       <%= link_to '목록으로', boards_path %>
     </div>  
@@ -38,7 +39,7 @@
   
   <div class="container box2">
     <div class="row">
-    <form class="col s12" action="/reply/create/:board_id/:user_id" method="post">
+    <form class="col s12" action="/reply/create/<%=@board.id%>" method="post">
       <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea" name="content"></textarea>
@@ -84,6 +85,14 @@
   .btn{
     text-align:right;
     font-family:"Jeju Gothic";
+    width:100%;
+  }
+  .reply{
+    font-family:"Jeju Gothic";
+  }
+  .Go{
+    text-align:right;
+     font-family:"Jeju Gothic";
   }
   
 </style>

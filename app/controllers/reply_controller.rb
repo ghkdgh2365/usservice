@@ -6,7 +6,7 @@ class ReplyController < ApplicationController
     reply=Reply.new
     reply.content=params[:content]
     reply.board_id=params[:board_id]
-    reply.user_id=params[:user_id]
+    reply.user = current_user
     reply.save
     redirect_to :back
   end
