@@ -17,16 +17,10 @@ Rails.application.routes.draw do
   get 'home/search_receipts'
   get 'home/new_ask'
   post 'home/create_ask'
-<<<<<<< HEAD
-  get 'boards/search_group' # 학생회 게시판 찾을 때
-  get 'boards/show_group' # 대학 학생회 게시판 목록 보여줄 때
-  get 'boards/group/:user_id' => 'boards#group'
-=======
   get 'home/admin'
   get 'boards/search_group' # 학생회 게시판 찾을 때
   get 'boards/show_group' # 대학 학생회 게시판 목록 보여줄 때
   get 'boards/group/:user_id' => 'boards#group', as: "show_group_board_yap"
->>>>>>> 55135ee90fc17597fd5cd83c3207538cfec3aa89
   get 'boards/new/:group_code' => 'boards#new', as: "new_board_group"
   # post 'receipts/create_comment/:post_id' => 'receipts#create_comment'
   resources :boards
