@@ -23,4 +23,14 @@ class HomeController < ApplicationController
       end
     end
   end
+  def admin
+    @univ_alarm = User.where('univ_alarm=?', "1").order(:univ_id)
+    @college_alarm = User.where('college_alarm=?', "1").order(:college_id)
+    @major_alarm = User.where('major_alarm=?', "1").order(:major_id)
+  
+  end
+  
+  def filter_user
+
+  end
 end

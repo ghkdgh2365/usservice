@@ -1,6 +1,6 @@
 <div class="container">
   
-    <p id="notice"><%= notice %></p>
+
     
    <div class="container box">
       <h4>
@@ -14,7 +14,7 @@
       <p class="school">
         <strong></strong>
         <% @group_code = @board.group_code %>
-        <%= User.find_by(id: @group_code).username %>
+        <%= @group_code %>
       </p>
       <p>
        
@@ -30,8 +30,8 @@
       
       
     <div class="Go">
-      <%= link_to '수정하기', edit_board_path(@board) %> |
-      <%= link_to '목록으로', boards_path %>
+      <%= link_to '수정하기', edit_board_path(@board) %> 
+     <%= link_to '목록으로',   show_group_board_yap_path(@group_code) %>
     </div>  
   </div>
   <br>

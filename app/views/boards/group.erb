@@ -2,7 +2,7 @@
 
   <br>
   <br>
-  <h4><%= @group.username %>학생회에대한 건의사항을 올려주세요</h6>
+  <h4><%= @group.username %>학생회에대한 <br>건의사항을 올려주세요</h6>
   
   
   <table>
@@ -19,10 +19,10 @@
         <tr>
           <td><%= board.title %></td>
          
-          <td><%= link_to '게시물보기', board %></td>
+          <td id="list"><%= link_to '게시물보기', board %>
           <% if user_signed_in? %>
-          <td><%= link_to '수정하기', edit_board_path(board) if board.updatable_by? current_user %></td>
-          <td><%= link_to '삭제하기', board, method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } if board.deletable_by? current_user%></td>
+          <%= link_to '수정하기', edit_board_path(board) if board.updatable_by? current_user %>
+          <%= link_to '삭제하기', board, method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } if board.deletable_by? current_user%></td>
           <% end %>
         </tr>
       <% end %>
@@ -83,5 +83,8 @@
           font-family: 'Jeju Gothic', sans-serif;
           text-align:center;
           margin-top:10px;
+      }
+      #list{
+        text-align:right;
       }
 </style>
