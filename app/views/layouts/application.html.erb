@@ -19,7 +19,7 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down" style="margin-top:24px; color:white;">
          
-          <li><%= link_to "결산안 보기",  root_path %></li>
+          <li><%= link_to "결산안 보기",  root_path, :style => "color:white;" %></li>
           <li><%= link_to "학생회에 질문",  boards_search_group_path %></li>
           <li><%= link_to "요청하기",  home_new_ask_path %></li>
         <% if user_signed_in? %>
