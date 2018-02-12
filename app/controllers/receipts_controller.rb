@@ -1,6 +1,6 @@
 class ReceiptsController < ApplicationController
   before_action :set_receipt, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [ :edit, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
   
   # GET /receipts
   # GET /receipts.json
@@ -27,7 +27,6 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
     @receipt = Receipt.new(receipt_params)
-
     respond_to do |format|
       if @receipt.save
         format.html { redirect_to @receipt, notice: 'Receipt was successfully created.' }
@@ -74,6 +73,7 @@ class ReceiptsController < ApplicationController
     @end = selected_date(:end_date)
 
     @search_receipts = params[:search].present? ? Receipt.where(@date_method => @start..@end, user_id: @user_id) : Receipt.none
+    @this_user_id = params[:user_id]
   end
   
   def create_comment

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>어쓰</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
@@ -15,19 +15,19 @@
 
    <nav>
     <div class="nav-wrapper  light-blue darken-4">
-      <a href="/home/index" class="brand-logo center" style="margin-top: 7px;"><%= image_tag "usblack.png" , :size => "50x30" %></a>
+      <a href="/home/index" class="brand-logo center" style="margin-top: 7px;height: 50px;"><%= image_tag ("usblack.png") , :size => "50x30" %></a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down" style="margin-top:24px; color:white;">
          
-          <li><%= link_to "결산안 보기",  root_path %></li>
-          <li><%= link_to "학생회에 질문",  boards_search_group_path %></li>
-          <li><%= link_to "요청하기",  home_new_ask_path %></li>
+          <li><%= link_to "결산안 보기",  root_path, :style => "color:white;" %></li>
+          <li><%= link_to "학생회에 질문",  boards_search_group_path, :style => "color:white;" %></li>
+          <li><%= link_to "요청하기",  home_new_ask_path, :style => "color:white;" %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "나의정보", edit_user_registration_path %></li>
-          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "로그아웃하시겠습니까?" } %></li>
+          <li><%= link_to "나의정보", edit_user_registration_path, :style => "color:white;" %></li>
+          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "로그아웃하시겠습니까?" }, :style => "color:white;" %></li>
         <% else %>
-          <li><%= link_to "로그인", new_user_session_path %></li>
-          <li><%= link_to "회원가입", new_user_registration_path %></li>
+          <li><%= link_to "로그인", new_user_session_path, :style => "color:white;" %></li>
+          <li><%= link_to "회원가입", new_user_registration_path, :style => "color:white;" %></li>
         <% end %>
       </ul>
       <ul class="side-nav" id="mobile-demo">
