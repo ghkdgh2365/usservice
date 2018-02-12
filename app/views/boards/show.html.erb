@@ -8,13 +8,12 @@
       </h4>
       <hr>
       <p>
-        <strong><%= @board.user.email %></strong>
+        <strong><%= @board.user.present? ? @board.user.email : "익명"  %></strong>
         
       </p>
       <p class="school">
         <strong></strong>
         <% @group_code = @board.group_code %>
-        <%= @group_code %>
       </p>
       <p>
        
